@@ -1,14 +1,10 @@
 #include <Ps3Controller.h>
 #include <ESP32_Servo.h>
 
-//#define ENABLE 18
-//#define DIRA 17
-//#define DIRB 5
-//
 #define ENABLE 27
 #define DIRA 26
 #define DIRB 14
-//
+
 #define motor1Pin1 27
 #define motor1Pin2  26
 #define enable1Pin 14
@@ -20,7 +16,6 @@ const int resolution = 8;
 int dutyCycle = 200;
 
 //Digital Push Control
-
 Servo servo1;
 Servo servo2;
 Servo servo3;
@@ -43,28 +38,15 @@ void homeServo(Servo &theServo) {
 void notify()
 {
   //------DC Motor-------
-
-  if ( Ps3.event.button_down.l2 ) {
-    Serial.println("Started pressing the left trigger button");
-//    digitalWrite(ENABLE, HIGH);
-//    digitalWrite(DIRA, LOW); //reverse
-//    digitalWrite(DIRB, HIGH);
+  if ( Ps3.event.button_down.r1 ) {
+    Serial.println("Started pressing R1");
+    moveright();
+  }
+  if ( Ps3.event.button_down.l1 ) {
+    Serial.println("Started pressing the L1");
+    moveleft();
   }
 
-  if ( Ps3.event.button_up.l2 ) {
-    Serial.println("Released the left trigger button");
-//    digitalWrite(ENABLE, LOW); // disable
-  }
-  if ( Ps3.event.button_down.r2 ) {
-    Serial.println("Started pressing the right trigger button");
-//    digitalWrite(ENABLE, HIGH); // enable on
-//    digitalWrite(DIRA, HIGH); //one way
-//    digitalWrite(DIRB, LOW);
-  }
-  if ( Ps3.event.button_up.r2 ) {
-    Serial.println("Released the right trigger button");
-//    digitalWrite(ENABLE, LOW); // disable
-  }
   // -------Servos------
   if ( Ps3.event.button_down.cross ) {
     Serial.println("Started pressing the cross button");
@@ -134,14 +116,6 @@ void notify()
   if ( Ps3.event.button_up.left ) {
     Serial.println("Released the left button");
     homeServo(servo4);
-  }
-  if ( Ps3.event.button_down.r1 ) {
-    Serial.println("Started pressing R1");
-    moveright();
-  }
-  if ( Ps3.event.button_down.l1 ) {
-    Serial.println("Started pressing the L1");
-    moveleft();
   }
 }
 
