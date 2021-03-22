@@ -43,16 +43,6 @@ byte LED6s = 0b00000100;
 byte LED7s = 0b00000010;
 byte LED8s = 0b00000001;
 
-//byte 1LED[] = {0b10000000,
-//               0b01000000,
-//               0b00100000,
-//               0b00010000,
-//               0b00001000,
-//               0b00000100,
-//               0b00000010,
-//               0b00000001
-//              };
-
 byte REDLEDs = 0b10101010;
 byte BLUELEDs = 0b01010101;
 
@@ -145,19 +135,9 @@ void loop() {
       Serial.print(F("\r\nL2: "));
       Serial.print(PS3.getAnalogButton(L2));
 
-      //      analogWrite(ENABLE, 255); //enable on
-      //      digitalWrite(DIRA, HIGH); //one way
-      //      digitalWrite(DIRB, LOW);
-      //      analogWrite(ENABLE, PS3.getAnalogButton(L2)); //half speed
-
       if (PS3.PS3Connected) {
         Serial.print(F("\tR2: "));
         Serial.print(PS3.getAnalogButton(R2));
-
-        //        analogWrite(ENABLE, 255); //enable on
-        //        digitalWrite(DIRB, LOW);
-        //        digitalWrite(DIRA, HIGH); //other way
-        //        analogWrite(ENABLE, LeftHatX); //half speed
       }
     }
 
@@ -198,27 +178,20 @@ void loop() {
         Serial.print(F("\r\nLeft"));
         lightServo(LED1s, servo4, 180, 200);
       }
-
       if (PS3.getButtonClick(L1)) {
         Serial.print(F("\r\nL1"));
         moveleft();
       }
-
       if (PS3.getButtonClick(R1)) {
         Serial.print(F("\r\nR1"));
         moveright();
       }
-
-
-
       if (PS3.getButtonClick(SELECT)) {
         Serial.print(F("\r\nSelect - "));
-//        PS3.printStatusString();
         seven_nation_army();
       }
       if (PS3.getButtonClick(START)) {
         Serial.print(F("\r\nStart"));
-        //        printAngle = !printAngle;
         sonata();
       }
     }
